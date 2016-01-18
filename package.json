@@ -1,0 +1,19 @@
+{
+  "name": "woggle",
+  "version": "1.0.0",
+  "description": "A game about words",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julien Wajsberg",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "gobble-babel": "^5.5.8",
+    "gobble-browserify": "^0.6.1",
+    "gobble-cli": "^0.6.0",
+    "jshint": "^2.9.1",
+    "karma": "^0.13.19"
+  },
+  "dependencies": {}
+}
