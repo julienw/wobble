@@ -4,7 +4,10 @@
   "description": "A game about words",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/gobble build out",
+    "watch": "./node_modules/.bin/gobble watch out",
+    "serve": "./node_modules/.bin/gobble"
   },
   "author": "Julien Wajsberg",
   "license": "AGPL-3.0",

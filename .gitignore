@@ -1,1 +1,3 @@
-.gobble
+.gobble*
+node_modules
+out
