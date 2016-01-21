@@ -3,6 +3,8 @@
 export function Grid() {
 }
 
-Grid.prototype.render = function() {
-  console.log('youhou');
+Grid.prototype = {
+  render() {
+    console.log('youhou');
+  },
 };

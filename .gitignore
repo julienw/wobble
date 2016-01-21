@@ -1,3 +1,6 @@
 .gobble*
 node_modules
 out
+*.sw*
+npm-debug.log
+
