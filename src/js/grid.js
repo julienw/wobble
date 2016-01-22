@@ -1,5 +1,4 @@
 /**
- * @param {Node} node Element where the gris will render
  * @param {{w: Number, h: Number}} size Size of the grid (cell count)
  * @param {Array.Number} values Array of values to use in this cell. Its length
  * needs to be w * h.
@@ -7,7 +6,7 @@
  * render to, the value to render
  * @returns {Grid} New object Grid
  */
-export function Grid(node, size, values, cellRenderer) {
+export default function Grid(size, values, cellRenderer) {
   if (values.length !== size.w * size.h) {
     throw new Error(
       `values.length must equal size.w * size.h
@@ -19,11 +18,6 @@ export function Grid(node, size, values, cellRenderer) {
     throw new Error('cellRenderer must be a function');
   }
 
-  if (!(node instanceof Element)) {
-    throw new Error('node must be an Element');
-  }
-
-  this.node = node;
   this.size = size;
   this.values = values;
   this.cellRenderer = cellRenderer;
@@ -42,9 +36,17 @@ Grid.prototype = {
     }
   },
 
-  render() {
+  /**
+  * @param {Node} node Element where the gris will render
+  * @returns {void}
+  */
+  render(node) {
+    if (!(node instanceof Element)) {
+      throw new Error('node must be an Element');
+    }
+
     this.computeValues();
-    this.node.textContent = '';
+    node.textContent = '';
     const table = document.createElement('table');
     this.grid.forEach((row) => {
       const tr = document.createElement('tr');
@@ -57,6 +59,6 @@ Grid.prototype = {
       table.appendChild(tr);
     });
 
-    this.node.appendChild(table);
+    node.appendChild(table);
   }
 };

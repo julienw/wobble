@@ -1,6 +1,6 @@
-import develop from 'develop';
+import develop from './develop';
 
-export const data = Object.freeze({
+const data = Object.freeze({
   scores: Object.freeze({
     1: 'EAINORSTUL',
     2: 'DMG',
@@ -12,3 +12,4 @@ export const data = Object.freeze({
   distribution: develop('15E9A8I6N6O6R6S6T6U5L3D3M2G2B2C2P2F2H2VJQKWXYZ')
 });
 
+export default data;
