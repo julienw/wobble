@@ -18,9 +18,6 @@ export function developScores(scores) {
     letters.split('').forEach(letter => {
       result[letter] = score;
     });
-    const promise = new Promise((resolve, reject) => {
-      resolve(result);
-    });
   }
 
   return result;
