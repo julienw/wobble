@@ -1,6 +1,5 @@
-.gobble*
 node_modules
-out
+public
 *.sw*
 npm-debug.log
 
