@@ -4,7 +4,7 @@ export function developDistribution(str) {
   let result = '';
   while ((parsed = re.exec(str)) !== null) {
     const [, count, letter] = parsed;
-    result += letter.repeat(count);
+    result += letter.repeat(count || 1);
   }
 
   return result;
@@ -16,7 +16,11 @@ export function developScores(scores) {
   for (const score in scores) {
     const letters = scores[score];
     letters.split('').forEach(letter => {
-      result[letter] = score;
+      if (result[letter]) {
+        throw new Error(`Letter '${letter}' is specified twice.`);
+      }
+
+      result[letter] = +score;
     });
   }
 
