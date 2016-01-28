@@ -3,10 +3,6 @@ import { assert } from 'chai';
 import { developDistribution, developScores } from '../src/js/develop';
 
 suite('develop.js', function() {
-  setup(function() {
-    
-  });
-
   suite('distribution', function() {
     test('one letter', function() {
       assert.equal(developDistribution('a'), 'a');
@@ -66,12 +62,6 @@ suite('develop.js', function() {
         () => developScores({ 1: 'a', 2: 'a' })
       );
     });
-
-
-
-
-
   });
-
 });
 
