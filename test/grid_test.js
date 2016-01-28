@@ -65,6 +65,5 @@ suite('Grid', function() {
     const grid = new Grid(size, values, stub);
     assert.throws(() => grid.render('node'));
   });
-
-
 });
+
