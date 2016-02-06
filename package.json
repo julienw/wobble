@@ -21,8 +21,9 @@
     "eslint": "^2.0.0-beta.2",
     "gobble": "^0.10.2",
     "gobble-babel": "^6.0.0",
-    "gobble-browserify": "julienw/gobble-browserify#disable-cache",
     "gobble-cli": "^0.6.0",
+    "gobble-webpack": "^0.1.0",
+    "jade": "^1.11.0",
     "jsdom": "^8.0.1",
     "mocha": "^2.3.4",
     "sinon": "^1.17.3"

@@ -1,3 +1,6 @@
+import template from './test.jade';
+console.log('template : ', template());
+
 /**
  * @param {{w: Number, h: Number}} size Size of the grid (cell count)
  * @param {Array.Number} values Array of values to use in this cell. Its length
