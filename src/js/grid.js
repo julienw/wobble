@@ -1,12 +1,12 @@
+import gridTemplate from './grid.jade';
+
 /**
  * @param {{w: Number, h: Number}} size Size of the grid (cell count)
  * @param {Array.Number} values Array of values to use in this cell. Its length
  * needs to be w * h.
- * @param {Function} cellRenderer a function that takes 2 arguments: the node to
- * render to, the value to render
  * @returns {Grid} New object Grid
  */
-export default function Grid(size, values, cellRenderer) {
+export default function Grid(size, values) {
   if (values.length !== size.w * size.h) {
     throw new Error(
       `values.length must equal size.w * size.h
@@ -14,13 +14,8 @@ export default function Grid(size, values, cellRenderer) {
     );
   }
 
-  if (typeof cellRenderer !== 'function') {
-    throw new Error('cellRenderer must be a function');
-  }
-
   this.size = size;
   this.values = values;
-  this.cellRenderer = cellRenderer;
 }
 
 Grid.prototype = {
@@ -38,27 +33,15 @@ Grid.prototype = {
 
   /**
   * @param {Node} node Element where the gris will render
+  * @param {Object.<String, Number>} scores Information of letter to scores
   * @returns {void}
   */
-  render(node) {
+  render(node, scores) {
     if (!(node instanceof Element)) {
       throw new Error('node must be an Element');
     }
 
     this.computeValues();
-    node.textContent = '';
-    const table = document.createElement('table');
-    this.grid.forEach((row) => {
-      const tr = document.createElement('tr');
-      row.forEach((cell) => {
-        const td = document.createElement('td');
-        this.cellRenderer.call(null, td, cell);
-        tr.appendChild(td);
-      });
-
-      table.appendChild(tr);
-    });
-
-    node.appendChild(table);
+    node.innerHTML = gridTemplate({ grid: this.grid, scores });
   }
 };
