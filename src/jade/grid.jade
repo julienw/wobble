@@ -1,5 +1,5 @@
 table
-  each row in grid
+  each row, i in grid
     tr
-      each letter in row
-        td!= cellRenderer(letter)
+      each letter, j in row
+        td!= cellRenderer(letter, i, j)

@@ -1,0 +1,43 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  background: #cef;
+
+  font: 0.7em sans-serif;
+}
+
+.grid {
+  width: 100%;
+  height: 100vw;
+
+  margin: auto;
+
+  --qualifier-ld-color: #7EE7FC;
+  --qualifier-lt-color: #11308C;
+  --qualifier-wd-color: #FF33F1;
+  --qualifier-wt-color: #FA1111;
+}
+
+.grid table {
+  width: 100%;
+  height: 100%;
+}
+
+.grid tr {
+  height: 20%; /* actual value is useless */
+}
+
+.grid td {
+  width: 20%;
+  position: relative;
+}
+
+@media screen and (orientation: landscape) {
+  .grid {
+    width: 100vh;
+    height: 100%;
+  }
+}

@@ -1,2 +1,11 @@
-| #{letter}
-.score #{score}
+.letter(
+  class={
+    ['letter_' + qualifierClass]: qualifierClass,
+    'letter_has_qualifier': qualifierClass
+  })
+  .letter__inner #{letter}
+  .letter__score #{score}
+  .letter__qualifier.qualifier__ld(data-l10n-id='qualifier-ld') LD
+  .letter__qualifier.qualifier__lt(data-l10n-id='qualifier-lt') LT
+  .letter__qualifier.qualifier__wd(data-l10n-id='qualifier-wd') WD
+  .letter__qualifier.qualifier__wt(data-l10n-id='qualifier-wt') WT
