@@ -27,7 +27,7 @@
     "no-caller": 2,
     "no-case-declarations": 2,
     "no-else-return": 2,
-    "no-empty-label": 2,
+    "no-extra-label": 2,
     "no-empty-pattern": 2,
     "no-eval": 2,
     "no-implied-eval": 2,
@@ -63,6 +63,7 @@
     "no-shadow-restricted-names": 1,
     "no-undef": 2,
     "no-use-before-define": 2,
+    "no-console": 1,
 
     // style stuff
     "block-spacing": 2,
@@ -73,7 +74,7 @@
     "computed-property-spacing": 2,
     "eol-last": 2,
     "no-trailing-spaces": 2,
-    "indent": [2, 2, { "SwitchCase": 2 }],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "key-spacing": 2,
     "linebreak-style": 2,
     "spaced-comment": 2,
@@ -98,7 +99,9 @@
     "quote-props": [ 2, "as-needed" ],
     "semi-spacing": 2,
     "semi": 2,
-    "keyword-spacing": 2,
+    "keyword-spacing": [2, { "overrides": {
+      "switch": { "after": false }
+    }}],
     "space-before-blocks": 2,
     "space-before-function-paren": [ 2, "never"],
     "space-in-parens": 2,
