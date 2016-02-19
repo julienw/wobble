@@ -29,7 +29,7 @@ function cellRenderer(letter, row, column) {
   return cellTemplate({ letter, score: data.scores[letter], qualifierClass });
 }
 
-const grid = new Grid(size, values, cellRenderer);
 const gridElt = document.querySelector('.grid');
-grid.render(gridElt);
+const grid = new Grid(size, values, gridElt, cellRenderer);
+grid.render();
 

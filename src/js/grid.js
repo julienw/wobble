@@ -4,16 +4,21 @@ import gridTemplate from './grid.jade';
  * @param {{w: Number, h: Number}} size Size of the grid (cell count)
  * @param {Array.Number} values Array of values to use in this cell. Its length
  * needs to be w * h.
+ * @param {Node} node Element where the grid will render
  * @param {Function} cellRenderer a function that takes 2 arguments: the node to
  * render to, the value to render
  * @returns {Grid} New object Grid
  */
-export default function Grid(size, values, cellRenderer) {
+export default function Grid(size, values, node, cellRenderer) {
   if (values.length !== size.w * size.h) {
     throw new Error(
       `values.length must equal size.w * size.h
       (${values.length} != ${size.w} * ${size.h})`
     );
+  }
+
+  if (!(node instanceof Element)) {
+    throw new Error('node must be an Element');
   }
 
   if (typeof cellRenderer !== 'function') {
@@ -23,6 +28,7 @@ export default function Grid(size, values, cellRenderer) {
   this.size = size;
   this.values = values;
   this.cellRenderer = cellRenderer;
+  this.node = node;
 }
 
 Grid.prototype = {
@@ -39,15 +45,13 @@ Grid.prototype = {
   },
 
   /**
-  * @param {Node} node Element where the gris will render
-  * @returns {void}
-  */
-  render(node) {
-    if (!(node instanceof Element)) {
-      throw new Error('node must be an Element');
-    }
-
+   * Render the Grid to the prevoisly specified node.
+   * @returns {void}
+   */
+  render() {
     this.computeValues();
-    node.innerHTML = gridTemplate({ grid: this.grid, cellRenderer: this.cellRenderer });
+    this.node.innerHTML = gridTemplate(
+      { grid: this.grid, cellRenderer: this.cellRenderer }
+    );
   }
 };
