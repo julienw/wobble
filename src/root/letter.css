@@ -23,6 +23,7 @@
 }
 
 .letter__inner {
+  width: 100%;
   margin: auto;
 }
 
