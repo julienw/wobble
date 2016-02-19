@@ -29,9 +29,41 @@ export default function Grid(size, values, node, cellRenderer) {
   this.values = values;
   this.cellRenderer = cellRenderer;
   this.node = node;
+
+  this.attachEventListeners();
 }
 
 Grid.prototype = {
+  attachEventListeners() {
+    this.node.addEventListener('mousedown', this);
+  },
+
+  handleEvent(e) {
+    switch(e.type) {
+      case 'mousedown':
+        this.onMousedown(e);
+        break;
+      case 'mouseup':
+        this.onMouseup(e);
+        break;
+      case 'mousemove':
+        this.onMousemove(e);
+        break;
+      default:
+        console.error(`Event ${e.type} is unexpected.`);
+    }
+  },
+
+  onMousedown() {
+    this.node.addEventListener('mousemove', this);
+    document.body.addEventListener('mouseup', this);
+  },
+
+  onMouseup() {
+    this.node.removeEventListener('mousemove', this);
+    document.body.removeEventListener('mouseup', this);
+  },
+
   computeValues() {
     let count = 0;
 
