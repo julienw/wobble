@@ -5,6 +5,7 @@ module.exports = gobble([
   gobble('src/root'),
   gobble([
     gobble('src/js'),
+    gobble('src/libs'),
     gobble('src/jade').transform('jade-es6')
   ])
   .transform('babel')

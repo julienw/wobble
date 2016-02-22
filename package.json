@@ -29,6 +29,8 @@
     "sinon": "^1.17.3"
   },
   "dependencies": {
+    "dom-closest": "^0.2.0",
+    "dom-matches": "^2.0.0",
     "random-js": "^1.0.8"
   }
 }

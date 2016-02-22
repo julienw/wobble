@@ -110,7 +110,6 @@
 
     // es6 stuff
     "arrow-body-style": 2,
-    "arrow-parens": [ 2, "always" ],
     "arrow-spacing": 2,
     "constructor-super": 2,
     "no-confusing-arrow": 2,

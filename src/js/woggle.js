@@ -31,5 +31,7 @@ function cellRenderer(letter, row, column) {
 
 const gridElt = document.querySelector('.grid');
 const grid = new Grid(size, values, gridElt, cellRenderer);
+grid.on('letter', letter => console.log('letter', letter));
+grid.on('word', word => console.log('word', word));
 grid.render();
 
