@@ -34,6 +34,7 @@ export default function Grid(size, values, node, cellRenderer) {
   this.node = node;
   this.currentMove = [];
   this.grid = null;
+  this.blocked = false;
 
   EventDispatcher.mixin(this, ['letter', 'word']);
 
@@ -69,6 +70,7 @@ Grid.prototype = {
     }
 
     this.currentMove.length = 0;
+    this.blocked = false;
 
     console.log('onMousedown', e.target);
     this.node.setCapture(/* retargetToElement */ false);
@@ -96,6 +98,7 @@ Grid.prototype = {
 
     this.emit('word', word);
     this.currentMove.length = 0;
+    this.blocked = false;
   },
 
   onMousemove(e) {
@@ -103,7 +106,21 @@ Grid.prototype = {
       return;
     }
 
-    if (this.currentMove.indexOf(e.target) >= 0) {
+    const index = this.currentMove.lastIndexOf(e.target);
+    const isLastMove = index === this.currentMove.length - 1;
+
+    if (this.blocked) {
+      if (isLastMove) {
+        this.blocked = false;
+      } else {
+        return;
+      }
+    }
+
+    if (index >= 0) {
+      if (!isLastMove) {
+        this.blocked = true;
+      }
       return;
     }
 

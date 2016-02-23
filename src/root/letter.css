@@ -24,6 +24,7 @@
 
 .letter__inner {
   /* width: 100%; disable for now */
+  width: 80%;
   margin: auto;
 }
 
