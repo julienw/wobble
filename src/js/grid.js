@@ -82,8 +82,16 @@ Grid.prototype = {
     this.node.removeEventListener('mousemove', this);
     this.node.removeEventListener('mouseup', this);
 
-    const word = this.currentMove.map(
-      inner => closest(inner, '[data-letter]').dataset.letter
+    const parents = this.currentMove.map(
+      inner => closest(inner, '[data-letter]')
+    );
+
+    parents.forEach(
+      letterElt => letterElt.classList.remove('letter_active')
+    );
+
+    const word = parents.map(
+      letterElt => letterElt.dataset.letter
     ).join('');
 
     this.emit('word', word);
@@ -99,7 +107,10 @@ Grid.prototype = {
       return;
     }
 
-    this.emit('letter', closest(e.target, '[data-letter]').dataset.letter);
+    const parentLetter = closest(e.target, '[data-letter]');
+    parentLetter.classList.add('letter_active');
+
+    this.emit('letter', parentLetter.dataset.letter);
 
     this.currentMove.push(e.target);
   },

@@ -93,3 +93,7 @@
 .letter_has_qualifier {
   border-width: 3px;
 }
+
+.letter_active, .letter_active:hover, .letter_hover:focus {
+  background: linear-gradient(to bottom, #fa0, #f80);
+}
