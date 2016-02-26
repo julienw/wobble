@@ -46,17 +46,23 @@ export default function Grid(size, values, node, cellRenderer) {
 Grid.prototype = {
   attachEventListeners() {
     this.node.addEventListener('mousedown', this);
+    this.node.addEventListener('touchstart', this);
   },
 
   handleEvent(e) {
     switch(e.type) {
       case 'mousedown':
+      case 'touchstart':
         this.onMousedown(e);
         break;
       case 'mouseup':
+      case 'mouseleave':
+      case 'touchend':
+      case 'touchcancel':
         this.onMouseup(e);
         break;
       case 'mousemove':
+      case 'touchmove':
         this.onMousemove(e);
         break;
       default:
@@ -69,20 +75,39 @@ Grid.prototype = {
       return;
     }
 
-    this.currentMove.length = 0;
-    this.blocked = false;
+    e.preventDefault();
 
-    console.log('onMousedown', e.target);
+    if (this.currentMove.length) {
+      // don't start a new move if one is already happening
+      // (should handle multitouch)
+      return;
+    }
+
+    this.blocked = false;
+    this.addNewLetterFromTarget(e.target);
+
+    console.log(e.type, e.target);
     this.node.setCapture(/* retargetToElement */ false);
     this.node.addEventListener('mousemove', this);
+    this.node.addEventListener('touchmove', this);
     this.node.addEventListener('mouseup', this);
+    this.node.addEventListener('touchend', this);
+    this.node.addEventListener('touchcancel', this);
+    this.node.addEventListener('mouseleave', this);
   },
 
   onMouseup(e) {
-    console.log('onMouseup', e.target);
+    if (e.touches && e.touches.length) {
+      // don't stop the move if we still have some touch
+      return;
+    }
 
     this.node.removeEventListener('mousemove', this);
+    this.node.removeEventListener('touchmove', this);
     this.node.removeEventListener('mouseup', this);
+    this.node.removeEventListener('touchend', this);
+    this.node.removeEventListener('touchcancel', this);
+    this.node.removeEventListener('mouseleave', this);
 
     const parents = this.currentMove.map(
       inner => closest(inner, '[data-letter]')
@@ -101,12 +126,31 @@ Grid.prototype = {
     this.blocked = false;
   },
 
+  elementFromTouches(touches) {
+    let target = null;
+    if (touches.length) {
+      const touch = touches[0];
+      target = document.elementFromPoint(touch.pageX, touch.pageY);
+    }
+    return target;
+  },
+
   onMousemove(e) {
-    if (!e.target.classList.contains('letter__inner')) {
+    e.preventDefault();
+
+    let target = e.target;
+    if (e.touches) {
+      target = this.elementFromTouches(e.touches);
+      if (!target) {
+        return;
+      }
+    }
+
+    if (!target.classList.contains('letter__inner')) {
       return;
     }
 
-    const index = this.currentMove.lastIndexOf(e.target);
+    const index = this.currentMove.lastIndexOf(target);
     const isLastMove = index === this.currentMove.length - 1;
 
     if (this.blocked) {
@@ -124,12 +168,18 @@ Grid.prototype = {
       return;
     }
 
-    const parentLetter = closest(e.target, '[data-letter]');
+    console.log(e.type, target);
+
+    this.addNewLetterFromTarget(target);
+  },
+
+  addNewLetterFromTarget(inner) {
+    const parentLetter = closest(inner, '[data-letter]');
     parentLetter.classList.add('letter_active');
 
     this.emit('letter', parentLetter.dataset.letter);
 
-    this.currentMove.push(e.target);
+    this.currentMove.push(inner);
   },
 
   computeValues() {
