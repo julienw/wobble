@@ -21,7 +21,7 @@
     "gobble": "^0.10.2",
     "gobble-babel": "^6.0.0",
     "gobble-cli": "^0.6.0",
-    "gobble-eslint": "julienw/gobble-eslint#use-cliengine-interface",
+    "gobble-eslint": "julienw/gobble-eslint#use-growl",
     "gobble-webpack": "^0.1.0",
     "jade": "^1.11.0",
     "jsdom": "^8.0.1",
