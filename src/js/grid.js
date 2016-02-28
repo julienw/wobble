@@ -1,7 +1,8 @@
 import gridTemplate from './grid.jade';
 import { EventDispatcher } from './event_dispatcher';
-import matches from 'dom-matches';
 import closest from 'dom-closest';
+
+// import matches from 'dom-matches';
 
 /**
  * @param {{w: Number, h: Number}} size Size of the grid (cell count)
