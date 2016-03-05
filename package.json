@@ -22,6 +22,7 @@
     "gobble-cli": "^0.6.0",
     "gobble-devnull": "*",
     "gobble-eslint": "julienw/gobble-eslint#use-growl",
+    "gobble-jade-es6": "^1.0.2",
     "gobble-mocha": "julienw/gobble-mocha#julien-flavor",
     "gobble-webpack": "^0.1.0",
     "jade": "^1.11.0",
