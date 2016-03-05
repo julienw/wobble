@@ -5,32 +5,32 @@ import { jsdom } from 'jsdom';
 import Grid from '../src/js/grid';
 
 suite('Grid', function() {
+  let node;
+
   setup(function() {
     global.document = jsdom();
     global.Element = document.defaultView.Element;
+    node = document.createElement('div');
   });
 
   test('2x3 grid', function() {
     const size = { w: 2, h: 3 };
     const values = 'abcdef';
     const stub = sinon.stub();
-    const node = document.createElement('div');
 
     // to check the grid is properly emptied before rendering
     node.innerHTML = '<div>';
 
-    const grid = new Grid(size, values, stub);
-    grid.render(node);
+    const grid = new Grid(size, values, node, stub);
+    grid.render();
 
-    const table = node.querySelector('table');
-    assert.ok(table);
-    assert.lengthOf(table.children, size.h);
-    Array.from(table.children).forEach((row, i) => {
-      assert.equal(row.tagName, 'TR');
+    const rows = node.querySelectorAll('table tr');
+    assert.lengthOf(rows, size.h);
+    Array.from(rows).forEach((row, i) => {
       assert.lengthOf(row.children, size.w);
       Array.from(row.children).forEach((cell, j) => {
         assert.equal(cell.tagName, 'TD');
-        sinon.assert.calledWith(stub, cell, values[i * size.w + j]);
+        sinon.assert.calledWith(stub, values[i * size.w + j], i, j);
       });
     });
   });
@@ -40,21 +40,21 @@ suite('Grid', function() {
     const values = 'abcd';
     const stub = sinon.stub();
 
-    assert.throws(() => new Grid(size, values, stub));
+    assert.throws(() => new Grid(size, values, node, stub));
   });
 
   test('throws if the cellRenderer is not provided', function() {
     const size = { w: 2, h: 2 };
     const values = 'abcd';
 
-    assert.throws(() => new Grid(size, values));
+    assert.throws(() => new Grid(size, values, node));
   });
 
   test('throws if the cellRenderer is not a function', function() {
     const size = { w: 2, h: 2 };
     const values = 'abcd';
 
-    assert.throws(() => new Grid(size, values, 'renderer'));
+    assert.throws(() => new Grid(size, values, node, 'renderer'));
   });
 
   test('throws if node is not an element', function() {
@@ -62,8 +62,7 @@ suite('Grid', function() {
     const values = 'abcd';
     const stub = sinon.stub();
 
-    const grid = new Grid(size, values, stub);
-    assert.throws(() => grid.render('node'));
+    assert.throws(() => new Grid(size, values, 'node', stub));
   });
 });
 
