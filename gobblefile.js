@@ -1,7 +1,16 @@
 /* eslint env:"node" */
 
 'use strict';
-const gobble = require('gobble');
+const realGobble = require('gobble');
+
+function gobble(arg) {
+  var result = realGobble(arg);
+  if (typeof arg === 'string') {
+    result = result.exclude('**/.*.sw?');
+  }
+
+  return result;
+}
 
 const lint =
   gobble([
