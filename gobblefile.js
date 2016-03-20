@@ -25,7 +25,9 @@ const js_sources = gobble([
   gobble('src/js'),
   gobble('src/libs'),
   gobble('src/jade').transform('jade-es6')
-]).transform('babel');
+]).transform('babel', {
+  ignore: ['BJSpell*']
+});
 
 const test = gobble([
   js_sources.moveTo('src/js'),
