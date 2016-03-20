@@ -13,7 +13,7 @@ const spellChecker = BJSpell('fr_FR.js');
 const size = Object.freeze({ w: 4, h: 4 });
 
 const r = Random();
-const values = r.string(size.w * size.h, data.distribution);
+const values = r.sample(data.distribution, size.w * size.h);
 
 const QUALIFIERS_TABLE = [
   ['ld', 'lt'],
