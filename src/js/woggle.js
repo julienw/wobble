@@ -2,6 +2,14 @@ import data from './data.fr';
 import Grid from './grid';
 import cellTemplate from './cell.jade';
 import Random from 'random-js';
+import { BJSpell } from './bjspell/BJSpell';
+
+/* eslint-disable camelcase, lines-around-comment */
+import { fr_FR } from './bjspell/fr_FR';
+BJSpell.fr_FR = fr_FR;
+/* eslint-enable camelcase, lines-around-comment */
+
+const spellChecker = BJSpell('fr_FR.js');
 
 const size = Object.freeze({ w: 4, h: 4 });
 
@@ -32,6 +40,9 @@ function cellRenderer(letter, row, column) {
 const gridElt = document.querySelector('.grid');
 const grid = new Grid(size, values, gridElt, cellRenderer);
 grid.on('letter', letter => console.log('letter', letter));
-grid.on('word', word => console.log('word', word));
+grid.on('word', word => {
+  const isCorrect = spellChecker.check(word);
+  console.log('word', word, isCorrect);
+});
 grid.render();
 
