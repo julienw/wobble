@@ -39,9 +39,29 @@ function cellRenderer(letter, row, column) {
 
 const gridElt = document.querySelector('.grid');
 const grid = new Grid(size, values, gridElt, cellRenderer);
-grid.on('letter', letter => console.log('letter', letter));
+
+const currentWordElt = document.querySelector('.current-word');
+let currentWord = '';
+
+function updateCurrentWord(newValue) {
+  currentWord = newValue;
+  currentWordElt.textContent = newValue;
+  currentWordElt.classList.remove('incorrect', 'correct');
+}
+
+
+grid.on('letter', letter => {
+  updateCurrentWord(currentWord + letter);
+});
+
 grid.on('word', word => {
+  currentWord = '';
   const isCorrect = spellChecker.check(word);
+  if (isCorrect) {
+    currentWordElt.classList.add('correct');
+  } else {
+    currentWordElt.classList.add('incorrect');
+  }
   console.log('word', word, isCorrect);
 });
 grid.render();

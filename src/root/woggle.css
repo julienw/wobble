@@ -35,6 +35,31 @@ body, html {
   position: relative;
 }
 
+header {
+  display: flex;
+  height: 5rem;
+  align-items: center;
+
+  background: #88f;
+  font-size: 2rem;
+}
+
+.restart-button {
+}
+
+.current-word {
+  flex: auto;
+  margin: .5rem 1rem;
+}
+
+.current-word.correct {
+  color: white;
+}
+
+.current-word.incorrect {
+  color: red;
+}
+
 @media screen and (orientation: landscape) {
   .grid {
     width: 100vh;
