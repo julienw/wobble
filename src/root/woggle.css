@@ -60,6 +60,11 @@ header {
   color: red;
 }
 
+.total-score {
+  color: white;
+  margin: .5em 1em;
+}
+
 @media screen and (orientation: landscape) {
   .grid {
     width: 100vh;

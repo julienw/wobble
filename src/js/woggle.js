@@ -44,15 +44,16 @@ const gridElt = document.querySelector('.grid');
 const grid = new Grid(size, values, gridElt, cellRenderer);
 
 const currentWordElt = document.querySelector('.current-word');
+const totalScoreElt = document.querySelector('.total-score');
 let currentWord = '';
 let currentLetters = [];
+let totalScore = 0;
 
 function updateCurrentWord(newValue) {
   currentWord = newValue;
   currentWordElt.textContent = newValue;
   currentWordElt.classList.remove('incorrect', 'correct');
 }
-
 
 grid.on('letter', info => {
   updateCurrentWord(currentWord + info.letter);
@@ -106,6 +107,8 @@ grid.on('word', () => {
   if (isCorrect) {
     const score = calculateScore();
     updateCurrentWord(`${currentWord} (${score})`);
+    totalScore += score;
+    totalScoreElt.textContent = totalScore;
     currentWordElt.classList.add('correct');
   } else {
     currentWordElt.classList.add('incorrect');
