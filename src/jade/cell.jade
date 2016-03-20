@@ -1,8 +1,10 @@
 .letter(
   data-letter=letter
+  data-row=row
+  data-column=column
   class={
-    ['letter_' + qualifierClass]: qualifierClass,
-    'letter_has_qualifier': qualifierClass
+    ['letter_' + qualifier]: qualifier,
+    'letter_has_qualifier': qualifier
   })
   .letter__inner #{letter}
   .letter__score #{score}

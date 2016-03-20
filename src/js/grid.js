@@ -178,7 +178,11 @@ Grid.prototype = {
     const parentLetter = closest(inner, '[data-letter]');
     parentLetter.classList.add('letter_active');
 
-    this.emit('letter', parentLetter.dataset.letter);
+    this.emit('letter', {
+      letter: parentLetter.dataset.letter,
+      row: +parentLetter.dataset.row,
+      column: +parentLetter.dataset.column
+    });
 
     this.currentMove.push(inner);
   },
