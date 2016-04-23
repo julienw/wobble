@@ -1,0 +1,100 @@
+.letter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+
+  background: linear-gradient(to bottom, #ffa, #ff8);
+  border-radius: .5rem;
+  border: 1px solid #dd4;
+  text-align: center;
+
+  font-size: 5rem;
+
+  cursor: pointer;
+  -moz-user-select: none;
+}
+
+.letter:hover, .letter:focus {
+  background: linear-gradient(to bottom, #ee8, #ee4)
+}
+
+.letter__inner {
+  /* width: 100%; disable for now */
+  width: 80%;
+  margin: auto;
+}
+
+.letter__score {
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+
+  font-size: 1.5rem;
+
+  pointer-events: none;
+}
+
+.letter__qualifier {
+  display: none;
+}
+
+.letter_ld .qualifier__ld,
+.letter_wd .qualifier__wd,
+.letter_lt .qualifier__lt,
+.letter_wt .qualifier__wt {
+  display: block;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  font-size: 1rem;
+}
+
+.qualifier__ld {
+  background-color: var(--qualifier-ld-color);
+  color: black;
+}
+
+.qualifier__lt {
+  background-color: var(--qualifier-lt-color);
+  color: white;
+}
+
+.qualifier__wd {
+  background-color: var(--qualifier-wd-color);
+  color: black;
+}
+
+.qualifier__wt {
+  background-color: var(--qualifier-wt-color);
+  color: black;
+}
+
+.letter_ld {
+  border-color: var(--qualifier-ld-color);
+}
+
+.letter_lt {
+  border-color: var(--qualifier-lt-color);
+}
+
+.letter_wd {
+  border-color: var(--qualifier-wd-color);
+}
+
+.letter_wt {
+  border-color: var(--qualifier-wt-color);
+}
+
+.letter_has_qualifier {
+  border-width: 3px;
+}
+
+.letter_active, .letter_active:hover, .letter_hover:focus {
+  background: linear-gradient(to bottom, #fa0, #f80);
+}
