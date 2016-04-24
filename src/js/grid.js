@@ -88,7 +88,7 @@ Grid.prototype = {
     this.addNewLetterFromTarget(e.target);
 
     console.log(e.type, e.target);
-    this.node.setCapture(/* retargetToElement */ false);
+    this.node.setCapture && this.node.setCapture(/* retargetToElement */ false);
     this.node.addEventListener('mousemove', this);
     this.node.addEventListener('touchmove', this);
     this.node.addEventListener('mouseup', this);
