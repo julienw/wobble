@@ -2,15 +2,15 @@ import { developScores, developDistribution } from './develop';
 
 const data = Object.freeze({
   scores: Object.freeze(developScores({
-    1: 'EAINORSTUL',
-    2: 'DMG',
-    3: 'BCP',
-    4: 'FHV',
-    8: 'JQ',
-    10: 'KWXYZ'
+    1: 'eainorstul',
+    2: 'dmg',
+    3: 'bcp',
+    4: 'fhv',
+    8: 'jq',
+    10: 'kwxyz'
   })),
   distribution: developDistribution(
-    '15E9A8I6N6O6R6S6T6U5L3D3M2G2B2C2P2F2H2VJQKWXYZ'
+    '15e9a8i6n6o6r6s6t6u5l3d3m2g2b2c2p2f2h2vjqkwxyz'
   )
 });
 

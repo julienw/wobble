@@ -1,5 +1,6 @@
 import data from './data.fr';
 import Grid from './grid';
+import { findCombinations } from './words';
 import cellTemplate from './cell.jade';
 import Random from 'random-js';
 import { BJSpell } from './bjspell/BJSpell';
@@ -103,10 +104,14 @@ function calculateScore() {
 }
 
 grid.on('word', () => {
-  const isCorrect = spellChecker.check(currentWord);
-  if (isCorrect) {
+  const combinations = findCombinations(currentWord);
+  const correctWord = combinations.find(
+    combination => spellChecker.check(combination)
+  );
+
+  if (correctWord) {
     const score = calculateScore();
-    updateCurrentWord(`${currentWord} (${score})`);
+    updateCurrentWord(`${correctWord} (${score})`);
     totalScore += score;
     totalScoreElt.textContent = totalScore;
     currentWordElt.classList.add('correct');
