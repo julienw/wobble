@@ -9,7 +9,7 @@
     "lint": "ESLINT_FAIL=1 npm run build",
     "build": "node_modules/.bin/gobble build out -f",
     "watch": "node_modules/.bin/gobble watch out",
-    "serve": "node_modules/.bin/gobble"
+    "start": "node_modules/.bin/gobble"
   },
   "author": "Julien Wajsberg",
   "license": "AGPL-3.0",
