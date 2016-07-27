@@ -41,31 +41,36 @@ function cellRenderer(letter, row, column) {
   return cellTemplate(findLetterInfos(letter, row, column));
 }
 
+function newState() {
+  return {
+    foundWords: new Set(),
+    totalScore: 0,
+    currentWord: '',
+    currentLetters: [],
+  };
+}
+
+let dealState = newState();
+
 const gridElt = document.querySelector('.grid');
 const grid = new Grid(size, values, gridElt, cellRenderer);
 
 const currentWordElt = document.querySelector('.current-word');
 const totalScoreElt = document.querySelector('.total-score');
-let currentWord = '';
-let currentLetters = [];
-let totalScore = 0;
-const dealState = {
-  foundWords: new Set()
-};
 
 function updateCurrentWord(newValue) {
-  currentWord = newValue;
+  dealState.currentWord = newValue;
   currentWordElt.textContent = newValue;
   currentWordElt.classList.remove('incorrect', 'correct');
 }
 
 grid.on('letter', info => {
-  updateCurrentWord(currentWord + info.letter);
-  currentLetters.push(info);
+  updateCurrentWord(dealState.currentWord + info.letter);
+  dealState.currentLetters.push(info);
 });
 
 function calculateScore() {
-  const letters = currentLetters.map(info => {
+  const letters = dealState.currentLetters.map(info => {
     const { letter, row, column } = info;
     return findLetterInfos(letter, row, column);
   });
@@ -107,7 +112,7 @@ function calculateScore() {
 }
 
 grid.on('word', () => {
-  const combinations = findCombinations(currentWord);
+  const combinations = findCombinations(dealState.currentWord);
   const correctWord = combinations.find(
     combination =>
       !dealState.foundWords.has(combination) &&
@@ -118,14 +123,14 @@ grid.on('word', () => {
     dealState.foundWords.add(correctWord);
     const score = calculateScore();
     updateCurrentWord(`${correctWord} (${score})`);
-    totalScore += score;
-    totalScoreElt.textContent = totalScore;
+    dealState.totalScore += score;
+    totalScoreElt.textContent = dealState.totalScore;
     currentWordElt.classList.add('correct');
   } else {
     currentWordElt.classList.add('incorrect');
   }
-  currentWord = '';
-  currentLetters = [];
+  dealState.currentWord = '';
+  dealState.currentLetters = [];
 });
 grid.render();
 
