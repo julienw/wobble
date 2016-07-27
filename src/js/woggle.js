@@ -49,6 +49,9 @@ const totalScoreElt = document.querySelector('.total-score');
 let currentWord = '';
 let currentLetters = [];
 let totalScore = 0;
+const dealState = {
+  foundWords: new Set()
+};
 
 function updateCurrentWord(newValue) {
   currentWord = newValue;
@@ -106,10 +109,13 @@ function calculateScore() {
 grid.on('word', () => {
   const combinations = findCombinations(currentWord);
   const correctWord = combinations.find(
-    combination => spellChecker.check(combination)
+    combination =>
+      !dealState.foundWords.has(combination) &&
+      spellChecker.check(combination)
   );
 
   if (correctWord) {
+    dealState.foundWords.add(correctWord);
     const score = calculateScore();
     updateCurrentWord(`${correctWord} (${score})`);
     totalScore += score;
