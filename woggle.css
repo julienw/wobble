@@ -50,6 +50,8 @@ header {
 .current-word {
   flex: auto;
   margin: .5rem 1rem;
+
+  text-transform: uppercase;
 }
 
 .current-word.correct {
