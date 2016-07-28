@@ -57,6 +57,11 @@ const grid = new Grid(size, values, gridElt, cellRenderer);
 
 const currentWordElt = document.querySelector('.current-word');
 const totalScoreElt = document.querySelector('.total-score');
+const restartElt = document.querySelector('.restart-button');
+restartElt.addEventListener('click', () => {
+  grid.render();
+  dealState = newState();
+});
 
 function updateCurrentWord(newValue) {
   dealState.currentWord = newValue;
