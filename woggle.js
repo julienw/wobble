@@ -185,10 +185,16 @@
 	}
 	
 	grid.on('word', function () {
-	  var combinations = (0, _words.findCombinations)(dealState.currentWord);
-	  var correctWord = combinations.find(function (combination) {
-	    return !dealState.foundWords.has(combination) && spellChecker.check(combination);
-	  });
+	  var correctWord = void 0;
+	
+	  if (dealState.currentWord.length > 1) {
+	    var combinations = (0, _words.findCombinations)(dealState.currentWord);
+	    correctWord = combinations.find(function (combination) {
+	      return !dealState.foundWords.has(combination) && spellChecker.check(combination);
+	    });
+	  } else {
+	    correctWord = null;
+	  }
 	
 	  if (correctWord) {
 	    dealState.foundWords.add(correctWord);
